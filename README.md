@@ -2,8 +2,6 @@
 
 [![CircleCI](https://circleci.com/gh/banzaicloud/banzailing.svg?style=svg)](https://circleci.com/gh/banzaicloud/banzailing)
 [![Go Report Card](https://goreportcard.com/badge/github.com/banzaicloud/banzailint?style=flat-square)](https://goreportcard.com/report/github.com/banzaicloud/banzailint)
-[![GolangCI](https://golangci.com/badges/github.com/banzaicloud/banzailint.svg)](https://golangci.com/r/github.com/banzaicloud/banzailint)
-[![GoDoc](http://img.shields.io/badge/godoc-reference-5272B4.svg?style=flat-square)](https://godoc.org/github.com/banzaicloud/banzailint)
 
 **Custom lint rules for Banzai Cloud code.**
 
