@@ -1,0 +1,10 @@
+linters-settings:
+    golint:
+        min-confidence: 0.1
+    goimports:
+        local-prefixes: github.com/banzaicloud/banzailint
+
+linters:
+    enable-all: true
+    disable:
+        - maligned

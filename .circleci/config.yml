@@ -1,0 +1,86 @@
+version: 2.1
+
+executors:
+    go:
+        docker:
+            -   image: circleci/golang:1.12
+                environment:
+                    GOFLAGS: -mod=readonly
+                    GOPROXY: https://proxy.golang.org
+
+jobs:
+    build:
+        executor: go
+        steps:
+            - checkout
+
+            -
+                restore_cache:
+                    name: Restore build dependencies
+                    keys:
+                        - build-deps-v1-{{ .Branch }}-{{ checksum "Makefile" }}
+
+            -
+                run:
+                    name: Download Go modules
+                    command: go mod download
+
+            -
+                run:
+                    name: Build
+                    command: make build
+
+            -
+                run:
+                    name: Run linter
+                    command: make lint
+
+            -
+                run:
+                    name: Run tests
+                    command: GOARGS="-p=2" make test
+
+            -
+                save_cache:
+                    name: Save build dependencies
+                    key: build-deps-v1-{{ .Branch }}-{{ checksum "Makefile" }}
+                    paths:
+                        - bin/
+
+            -
+                store_test_results:
+                    path: build/test_results/
+
+            -
+                store_artifacts:
+                    path: build/
+
+    release:
+        executor: go
+        steps:
+            - checkout
+
+            -
+                run:
+                    name: Release
+                    command: make release
+
+workflows:
+    version: 2
+    ci:
+        jobs:
+            -
+                build:
+                    filters:
+                        tags:
+                            only: /^v?\d+\.\d+\.\d+(-\S*)?$/
+
+            -
+                release:
+                    requires:
+                        - build
+                    filters:
+                        tags:
+                            only: /^v?\d+\.\d+\.\d+(-\S*)?$/
+                        branches:
+                            ignore: /.*/
