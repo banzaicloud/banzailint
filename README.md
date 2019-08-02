@@ -17,7 +17,7 @@ OS = $(shell uname | tr A-Z a-z)
 
 # ...
 
-BANZAILINT_VERSION = 0.0.0
+BANZAILINT_VERSION = 0.0.1
 
 # ...
 
