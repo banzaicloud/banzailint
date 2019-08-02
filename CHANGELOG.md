@@ -10,8 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 
-## [0.0.1] - 2019-08-02
+## 0.0.1 - 2019-08-02
+
+- Initial release
 
 
 [Unreleased]: https://github.com/banzaicloud/banzailint/compare/v0.0.1...HEAD
-[0.0.1]: https://github.com/banzaicloud/banzailint/compare/v0.0.0...v0.0.1
