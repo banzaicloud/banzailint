@@ -21,6 +21,7 @@ endif
 GOTESTSUM_VERSION = 0.3.5
 GOLANGCI_VERSION = 1.17.1
 GORELEASER_VERSION = 0.113.1
+BANZAILINT_VERSION = 0.0.1
 
 GOLANG_VERSION = 1.12
 
@@ -76,9 +77,16 @@ bin/golangci-lint-${GOLANGCI_VERSION}:
 	curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | BINARY=golangci-lint bash -s -- v${GOLANGCI_VERSION}
 	@mv bin/golangci-lint $@
 
+bin/banzailint: bin/banzailint-${BANZAILINT_VERSION}
+	@ln -sf banzailint-${BANZAILINT_VERSION} bin/banzailint
+bin/banzailint-${BANZAILINT_VERSION}:
+	@mkdir -p bin
+	curl -L https://github.com/banzaicloud/banzailint/releases/download/v${BANZAILINT_VERSION}/banzailint_${BANZAILINT_VERSION}_${OS}_amd64.tar.gz | tar -zOxf - banzailint > ./bin/banzailint-${BANZAILINT_VERSION} && chmod +x ./bin/banzailint-${BANZAILINT_VERSION}
+
 .PHONY: lint
-lint: bin/golangci-lint ## Run linter
+lint: bin/golangci-lint bin/banzailint ## Run linter
 	bin/golangci-lint run
+	bin/banzailint ./...
 
 bin/goreleaser: bin/goreleaser-${GORELEASER_VERSION}
 	@ln -sf goreleaser-${GORELEASER_VERSION} bin/goreleaser
