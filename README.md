@@ -1,6 +1,6 @@
 # Banzai Linter
 
-[![CircleCI](https://circleci.com/gh/banzaicloud/banzailing.svg?style=svg)](https://circleci.com/gh/banzaicloud/banzailing)
+[![CircleCI](https://circleci.com/gh/banzaicloud/banzailint.svg?style=svg)](https://circleci.com/gh/banzaicloud/banzailint)
 [![Go Report Card](https://goreportcard.com/badge/github.com/banzaicloud/banzailint?style=flat-square)](https://goreportcard.com/report/github.com/banzaicloud/banzailint)
 
 **Custom lint rules for Banzai Cloud code.**
