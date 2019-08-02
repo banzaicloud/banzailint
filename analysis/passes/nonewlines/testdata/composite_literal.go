@@ -12,37 +12,51 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main
+package testdata
 
-import (
-	"fmt"
-	"os"
-	"path/filepath"
-
-	"golang.org/x/tools/go/analysis/multichecker"
-
-	"github.com/banzaicloud/banzailint/analysis/passes/nonewlines"
-)
-
-// Provisioned by ldflags
-// nolint: gochecknoglobals
-var (
-	version    string
-	commitHash string
-	buildDate  string
-)
-
-func main() {
-	args := os.Args
-	progname := filepath.Base(args[0])
-
-	if len(args) > 1 && args[1] == "version" {
-		fmt.Printf("%s version %s (%s) built on %s\n", progname, version, commitHash, buildDate)
-
-		os.Exit(0)
+func CompositeLiteral() {
+	type a struct {
+		a string
 	}
 
-	multichecker.Main(
-		nonewlines.Analyzer,
-	)
+	type b struct {
+		b string
+	}
+
+	_ = a{ // want "composite literals should not start or end with empty lines"
+
+		a: "a",
+	}
+
+	// @formatter:off
+	_ = a{ // want "composite literals should not start or end with empty lines"
+		a: "a",
+
+	}
+
+	_ = a{ // want "composite literals should not start or end with empty lines"
+
+		a: "a",
+
+	}
+	// @formatter:on
+
+	_ = a{
+		a: "a",
+	}
+
+	_ = a{
+	}
+
+	_ = a{
+
+	}
+
+	_ = a{a: "a"}
+
+	_ = map[string]string{
+		"key": "value",
+	}
+
+	_ = map[string]string{"key": "value"}
 }

@@ -1,5 +1,6 @@
 <component name="ProjectCodeStyleConfiguration">
   <code_scheme name="Project" version="173">
+    <option name="FORMATTER_TAGS_ENABLED" value="true" />
     <GoCodeStyleSettings>
       <option name="ADD_PARENTHESES_FOR_SINGLE_IMPORT" value="true" />
       <option name="ADD_LEADING_SPACE_TO_COMMENTS" value="true" />
