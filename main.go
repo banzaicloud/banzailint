@@ -21,6 +21,7 @@ import (
 
 	"golang.org/x/tools/go/analysis/multichecker"
 
+	"github.com/banzaicloud/banzailint/analysis/passes/emptystringcheck"
 	"github.com/banzaicloud/banzailint/analysis/passes/nonewlines"
 )
 
@@ -44,5 +45,6 @@ func main() {
 
 	multichecker.Main(
 		nonewlines.Analyzer,
+		emptystringcheck.Analyzer,
 	)
 }
